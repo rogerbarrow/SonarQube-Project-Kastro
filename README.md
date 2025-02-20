@@ -1,29 +1,66 @@
-# SonarQube in 60 Minutes by Kastro
+1. Sonar Qube Introduction
+2. Open-source plat form
+3. Help static code analysis and code quality management 
+4. Analyzes source code for bugs, Vulnerabilties, code smells, Code duplication 
 
-This is a One-Stop solution real-time project on SonarQube to perform Code Quality Analysis. In this video, I have integrated Jenkins with Maven, SonarQube, and Docker, where the application will be accessed while running inside a container.
+Step 1. Launch EC2 instance 
 
-## 🎥 Course Links
+![[Pasted image 20250219153140.png]]
+step 2. SSH into the instance 
 
-- [Docker Playlist](https://www.youtube.com/playlist?list=PLs-PsDpuAuTeNx3OgGQ1QrpNBo-XE6VBh)
-- [Explore AWS Tutorials](https://www.youtube.com/playlist?list=PLs-PsDpuAuTdOcZa-DDgG8KRbtMI_XRrC)
-- [Nexus YouTube Video Link](https://youtu.be/opJAfDOCZuI)
+![[Pasted image 20250219155549.png]]
 
-## 🤝 Connect with Me
+run the sudo apt update
 
-For networking and further discussions, feel free to connect with me!
+![[Pasted image 20250219160238.png]]
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kastro-kiran/)
-[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/EGw6ZlwUHZc82cA0vXFnwm) - Join the DevOps technical discussions!
+Next lets Install Java
+![[Pasted image 20250219160831.png]]
 
-## 💬 Share Your Thoughts
+Next Install Jenkins
+```bash
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins -y
+```
 
-Your feedback is highly valuable! Feel free to share your opinions and suggestions in the **Comments section** of the videos.
+Next open Port 8080
 
-## 🎉 Happy Learning!
+![[Pasted image 20250219164630.png]]
+next login to Jenkins
 
-Stay committed, stay curious, and let’s build a strong DevOps foundation together.
+![[Pasted image 20250219165054.png]]
+next Lets Install Docker 
+![[Pasted image 20250219165835.png]]
 
----
+Instal Sonarqube
 
-<p align="center">
-    <img src="https://media.licdn.com/dms/image/v2/D5603AQHJB_lF1d9OSw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718971147172?e=1733356800&v=beta&t=bz-SXs7FHwIDqQ9xlPibErrGvpHDdAjMJEr9WqHsi9A" alt="Kastro Profile Image
+```bash
+Step 5: SonarQube Setup
+# Lets setup sonar server using Docker (this is the simplest way)
+$ sudo apt install docker.io
+
+#Lets give permissions to run docker
+$ sudo chmod 666 /var/run/docker.sock
+
+#Lets run docker commands to install SonarQube
+$ docker run -d --name sonarqube -p 9000:9000 sonarqube:lts-community
+
+$ docker ps
+
+```
+
+Run docker images to verify sonarqube is setup
+![[Pasted image 20250219172613.png]]
+
+Next open Port 9000 to access sonar qube
+
+![[Pasted image 20250219173820.png]]
+
+Next install jenkins Plugin
+
+![[Pasted image 20250219180051.png]]
